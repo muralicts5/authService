@@ -1,0 +1,4 @@
+{
+"image": "916980388691.dkr.ecr.ca-central-1.amazonaws.com/test-hi:latest"
+"taskDefinitionArn": "murali-hi-task"
+}

@@ -1,0 +1,9 @@
+version: 0.0
+Resources:
+ - TargetService:
+     Type: AWS::ECS::Service
+     Properties:
+       TaskDefinition: "murali-hi-task"
+       LoadBalancerInfo:
+         ContainerName: "greeting-cluster"
+         ContainerPort: 8200

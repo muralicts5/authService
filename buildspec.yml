@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region ca-central-1 | docker login --username AWS --password-stdin 916980388691.dkr.ecr.ca-central-1.amazonaws.com
+      - mvn clean package
+      - echo Build started on 'date 1232131'
+      - echo Building the Docker image...          
+      - docker build -t test-hi .
+      - docker tag test-hi:latest 916980388691.dkr.ecr.ca-central-1.amazonaws.com/test-hi:latest    
+      - docker image ls  
+      - echo Build started on 'docker image ls 123'
+
+  
+  post_build:
+    commands:
+      - echo Build completed on 'date'
+      - echo Pushing the Docker image...
+      - docker push 916980388691.dkr.ecr.ca-central-1.amazonaws.com/test-hi:latest
