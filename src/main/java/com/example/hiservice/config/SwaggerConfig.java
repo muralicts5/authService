@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
 import springfox.documentation.service.HttpAuthenticationScheme;
@@ -19,8 +20,8 @@ import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-//@Configuration
-//@EnableSwagger2
+@Configuration
+@EnableSwagger2
 public class SwaggerConfig {
 
 	private SecurityScheme jwtScheme() {
@@ -40,17 +41,28 @@ public class SwaggerConfig {
 		return new ApiKey("JWT", "Authorization", "header");
 	}
 
+	
+	@Bean
+	   public Docket productApi() {
+	      return new Docket(DocumentationType.SWAGGER_2)
+	          	    .securityContexts(Arrays.asList(securityContext()))
+	          	      .securitySchemes(Arrays.asList(apiKey()))
+	    		  .select()
+	         .apis(RequestHandlerSelectors.basePackage("com.example.hiservice.controller")).build();
+	   }
+	
+	
+	/*
 	@Bean
     public Docket api() { 
 		
-		
-        return new Docket(DocumentationType.SWAGGER_2)  
-        	    .securityContexts(Arrays.asList(securityContext()))
-        	      .securitySchemes(Arrays.asList(apiKey()))
+		/*return new Docket(DocumentationType.SWAGGER_2)  
+        	//    .securityContexts(Arrays.asList(securityContext()))
+        	//      .securitySchemes(Arrays.asList(apiKey()))
           .select()                                  
           .apis(RequestHandlerSelectors.any())              
           .paths(PathSelectors.any())
-          .build();                                           
-    }
+          .build();                                       
+    }*/
 
 }

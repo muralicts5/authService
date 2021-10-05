@@ -43,7 +43,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 
     private UsernamePasswordAuthenticationToken authenticate(HttpServletRequest request) {
         String token = request.getHeader("Authorization");
-        token=token.substring(7);
+        token=token.substring(7); //  
 
         if (token != null) {
             Claims user = Jwts.parser().setSigningKey(DatatypeConverter

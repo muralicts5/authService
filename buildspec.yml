@@ -19,3 +19,11 @@ phases:
       - echo Build completed on 'date'
       - echo Pushing the Docker image...
       - docker push 916980388691.dkr.ecr.ca-central-1.amazonaws.com/test-hi:latest
+	  -	printf '{"ImageURI":"image_URI"}' > imageDetail.json
+
+      - printf '[{"name":"MyService","imageUri":"%s"}]' 916980388691.dkr.ecr.ca-central-1.amazonaws.com/myservice/app:latest > imagedefinitions.json
+  
+  artifacts:
+    files: 
+	 - imageDetail.json
+

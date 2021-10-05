@@ -1,9 +1,9 @@
 version: 0.0
 Resources:
- - TargetService:
-     Type: AWS::ECS::Service
-     Properties:
-       TaskDefinition: "murali-hi-task"
-       LoadBalancerInfo:
-         ContainerName: "greeting-cluster"
-         ContainerPort: 8200
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: "arn:aws:ecs:eu-west-2:885843804602:task-definition/eureka-murali-task-def:1"
+        LoadBalancerInfo:
+          ContainerName: "eureka_container"
+          ContainerPort: 8761
