@@ -1,17 +1,20 @@
 package com.example.hiservice.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.hiservice.model.Employee;
 import com.example.hiservice.producer.KafkaProducer;
 import com.example.hiservice.service.HelloService;
 
@@ -24,6 +27,7 @@ import feign.slf4j.Slf4jLogger;
 
 @RestController
 @RequestMapping("/hi")
+@CrossOrigin("*")
 public class HiController  {
 	
 	@Autowired
@@ -32,6 +36,20 @@ public class HiController  {
 	@GetMapping
 	public String sayHello() {
 		return "hi";
+	}
+	
+	
+	@GetMapping("/employees")
+	public List<Employee> sayHelloEmployee() {
+		Employee e=new Employee();
+		e.setName("ramesh");
+		e.setDesignation("manager");
+		e.setEmail("email.com");
+		e.setEmployeeId(1001);
+		e.setSalary(3453);
+		List<Employee> employees=new ArrayList<Employee>();
+		employees.add(e);
+		return employees;
 	}
 	
 	
